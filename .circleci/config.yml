@@ -5,18 +5,34 @@ orbs:
 
 jobs:
   build:
-    working_directory: ~/web
-
     docker:
       - image: circleci/node:15.7
-
+    working_directory: ~/web
     steps:
       - checkout
       - run: npm install
-      - run: node src/js/helloCircleci.js
       - run: npm run build
+      - persist_to_workspace:
+          root: ~/web
+          paths:
+            - build
+
+  deploy:
+    docker:
+      - image: circleci/python:3.9.2
+    working_directory: ~/web
+
+    steps:
+      - attach_workspace:
+          at: ~/web
+
+      - run: sudo pip install awscli
+      - run: aws s3 sync ./dist s3://webpack-dist-sample/web
 
 workflows:
   node-tests:
     jobs:
       - build
+      - deploy:
+          requires:
+             - build
