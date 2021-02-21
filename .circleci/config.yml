@@ -13,6 +13,8 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - run: node src/js/helloCircleci.js
+      - run: npm run build
 
 workflows:
   node-tests:
