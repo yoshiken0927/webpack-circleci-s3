@@ -6,6 +6,10 @@ orbs:
 jobs:
   build:
     working_directory: ~/web
+
+    docker:
+      - image: circleci/node:9.9
+
     steps:
       - checkout
       - run: echo hello-circleci
