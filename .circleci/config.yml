@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - checkout
-      - run: echo hello-circleci
+      - run: npm install
 
 workflows:
   node-tests:
