@@ -8,7 +8,7 @@ jobs:
     working_directory: ~/web
 
     docker:
-      - image: circleci/node:9.9
+      - image: circleci/node:15.7
 
     steps:
       - checkout
