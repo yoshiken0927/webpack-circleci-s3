@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom';
 //コンポーネントを定義
 function Index() {
   return (
-    <p>Hello World</p>
+    <p>Hello World v1.0.3</p>
   );
 };
 
