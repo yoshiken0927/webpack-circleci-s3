@@ -32,7 +32,7 @@ jobs:
 workflows:
   node-tests:
     jobs:
-      - build
+      - build:
           filters:
             tags:
               only: /v.*/
