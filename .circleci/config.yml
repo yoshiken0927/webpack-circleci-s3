@@ -33,6 +33,9 @@ workflows:
   node-tests:
     jobs:
       - build
+          filters:
+            tags:
+              only: /v.*/
       - deploy:
           requires:
             - build
