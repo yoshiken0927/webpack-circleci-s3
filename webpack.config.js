@@ -1,18 +1,51 @@
 const path = require('path');
 const webpack = require('webpack');
+const context = path.resolve(__dirname, 'src');
 
 module.exports = {
-  entry: './src/ts/index.tsx',
+  entry: './src/index.tsx',
   module: {
     rules: [
       {
-        test: /\.tsx$/,
-        exclude: /node_modules/,
-        loader: 'ts-loader'
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              importLoaders: 1,
+              modules: {
+                localIdentName: "[path]___[name]__[local]___[hash:base64:5]"
+              }
+            }
+          },
+        ],
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.tsx$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              plugins: [
+                ["@babel/plugin-transform-typescript", { isTSX: true }],
+                '@babel/transform-react-jsx',
+                [
+                  'react-css-modules',
+                  {
+                    filetypes: {
+                      ".scss": {
+                        "syntax": "postcss-scss"
+                      }
+                    }
+                  }
+                ],
+              ]
+            }
+          },
+          'ts-loader',
+        ]
       },
     ],
   },
