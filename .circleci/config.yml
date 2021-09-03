@@ -20,7 +20,7 @@ jobs:
   deploy:
     docker:
       - image: circleci/python:3.9.2
-    working_directory: ~/web
+    working_directory: ~/web2
 
     steps:
       - attach_workspace:
